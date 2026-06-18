@@ -1,26 +1,17 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-
-import axios from 'axios'
+import apiClient from '../../api/api'
 
 const RegisterUser = () => {
-
-    // estados de controle dos campos
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [isPasswordMatch, setIsPasswordMatch] = useState(true)
+    const [isSaving, setIsSaving] = useState(false)
 
-    //funções que alteram o valor dos estados
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value)
-
-    // estados (match password e validação do botão de salvar)
-    const [isPasswordMatch, setIsPasswordMatch] = useState(true)
-
-    const [isSaving, setIsSaving] = useState(false)
-
-    // validação do match 
 
     const isPasswordValid = () => password.length >= 8 && password === confirmPassword
 
@@ -42,13 +33,13 @@ const RegisterUser = () => {
         setIsSaving(true)
 
         try {
-            await axios.post('http://localhost:3000/users', {
-                email, password
+            await apiClient.post('/usuarios', {
+                email,
+                senha: password
             })
 
-            setIsSaving(false)
             resetForm()
-            toast.success('Usuário Criado com Sucesso!', {
+            toast.success('Usuário criado com sucesso!', {
                 autoClose: 2000,
                 hideProgressBar: true
             })
@@ -58,12 +49,10 @@ const RegisterUser = () => {
                 autoClose: 2000,
                 hideProgressBar: true
             })
+        } finally {
             setIsSaving(false)
         }
-
-
     }
-
 
     return (
         <div className='w-full max-w-md p-6 bg-white rounded-xl'>
@@ -105,7 +94,6 @@ const RegisterUser = () => {
                         minLength={8}
                         className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
                     />
-
                     {!isPasswordMatch && (
                         <p className='text-red-500 text-sm mt-1'>As senhas não correspondem</p>
                     )}
@@ -115,16 +103,11 @@ const RegisterUser = () => {
                     <button
                         type='submit'
                         disabled={isSaving}
-                        className={`w-full p-2 rounded-lg text-white mt-4 ${isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
-                            } transition-colors`}
+                        className={`w-full p-2 rounded-lg text-white mt-4 ${isSaving ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 cursor-pointer'} transition-colors`}
                     >
-                        {isSaving ? "Salvando ..." : "Criar Usuário"}
-
+                        {isSaving ? "Salvando..." : "Criar Usuário"}
                     </button>
                 </div>
-
-
-
             </form>
         </div>
     )
