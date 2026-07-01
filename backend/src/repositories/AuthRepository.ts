@@ -5,6 +5,7 @@ export class AuthRepository {
     constructor(private readonly prisma: PrismaClient) {
         this.prisma = prisma
     }
+    
     async cadastrar(dadosUsuario: Partial<Usuario>) {
         return await this.prisma.usuario.create({
             data: {

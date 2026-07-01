@@ -4,7 +4,7 @@ import cors from "cors"
 import { auth } from './middleware/auth';
 
 import { authRouter } from './routes/auth';
-import { usuarioRouter } from './routes/usuario';
+import { usuarioRouter, usuarioPublicRouter } from './routes/usuario';
 import { exameRouter } from './routes/exame';
 import { consultaRouter } from "./routes/consulta";
 import { pacienteRouter } from "./routes/paciente";
@@ -20,8 +20,9 @@ app.get('/', (req, res) => {
 })
 
 app.use(authRouter)
+app.use(usuarioPublicRouter) // cadastro, sem auth
 
-app.use(auth)
+app.use(auth) // a partir daqui, tudo exige token
 
 app.use(usuarioRouter)
 app.use(exameRouter)
