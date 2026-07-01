@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import apiClient from '../../api/api'
 import { toast } from 'react-toastify'
 
-//modal
-
 import Modal from '../Modal'
-
-
 
 function ConsultationForm() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -24,13 +20,12 @@ function ConsultationForm() {
         dosagePrecautions: "",
     })
 
-
     // busca pacientes
 
     useEffect(() => {
         const fetchPatients = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/patients")
+                const response = await apiClient.get("/pacientes")
                 setPatients(response.data)
             } catch (error) {
                 console.error("Erro ao obter dados dos pacientes", error)
