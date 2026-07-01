@@ -19,7 +19,7 @@ setTimeout(() => {
         const decoded = jwt.verify(token, SECRET_KEY);
         console.log("Decodificado:", decoded);
     } catch (error) {
-        console.error("Token invalido:", error.message);
+        console.error("Token invalido:", (error as Error).message);
     }
 }, 5500)
 
