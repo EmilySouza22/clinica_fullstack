@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../../api/api';
 import { FaUserAlt } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const PatientsList = () => {
 	const [patients, setPatients] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [ages, setAges] = useState({});
+
+	const [filterInsurance, setFilterInsurance] = useState('');
+	const [filterAllergy, setFilterAllergy] = useState('');
+
+	const insuranceOptions = [
+		...new Set(patients.map((p) => p.healthInsurance).filter(Boolean)),
+	];
 
 	const calculateAge = (birthdate) => {
 		if (!birthdate) return '-';
@@ -23,11 +30,27 @@ const PatientsList = () => {
 		return age;
 	};
 
+	const filteredPatients = patients.filter((patient) => {
+		const matchesSearch = [patient.fullName, patient.email, patient.phone]
+			.join(' ')
+			.toLowerCase()
+			.includes(searchTerm.toLowerCase());
+
+		const matchesInsurance = filterInsurance
+			? patient.healthInsurance === filterInsurance
+			: true;
+
+		const matchesAllergy = filterAllergy
+			? patient.allergies?.toLowerCase().includes(filterAllergy.toLowerCase())
+			: true;
+
+		return matchesSearch && matchesInsurance && matchesAllergy;
+	});
+
 	useEffect(() => {
 		const fetchPatients = async () => {
 			try {
-				const response = await apiClient.get('/pacientes');
-				if (!response) return;
+				const response = await apiClient.get('/patients');
 
 				const patientsData = response.data;
 
@@ -50,20 +73,12 @@ const PatientsList = () => {
 		setSearchTerm(event.target.value);
 	};
 
-	const filteredPatients = patients.filter((patient) =>
-		[patient.fullName, patient.email, patient.phone]
-			.join(' ')
-			.toLowerCase()
-			.includes(searchTerm.toLowerCase()),
-	);
-
 	return (
 		<div className="bg-white shadow rounded-2xl p-6 mt-8">
 			<h2 className="text-xl font-semibold text-cyan-800 mb-4">
 				Informações Rápidas de Pacientes
 			</h2>
 
-			{/* Campo de busca */}
 			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
 				<label htmlFor="search" className="text-gray-700 font-medium">
 					Buscar Paciente:
@@ -75,6 +90,29 @@ const PatientsList = () => {
 					onChange={handleSearchChange}
 					placeholder="Digite o nome, email ou telefone"
 					className="border rounded-lg px-3 py-2 w-full sm:w-80 focus:ring-2 focus:ring-cyan-600 outline-none"
+				/>
+			</div>
+
+			<div className="flex flex-col sm:flex-row gap-3 mb-4">
+				<select
+					value={filterInsurance}
+					onChange={(e) => setFilterInsurance(e.target.value)}
+					className="border rounded-lg px-3 py-2 focus:ring-2 focus:ring-cyan-600 outline-none"
+				>
+					<option value="">Todos os convênios</option>
+					{insuranceOptions.map((insurance) => (
+						<option key={insurance} value={insurance}>
+							{insurance}
+						</option>
+					))}
+				</select>
+
+				<input
+					type="text"
+					value={filterAllergy}
+					onChange={(e) => setFilterAllergy(e.target.value)}
+					placeholder="Filtrar por alergia"
+					className="border rounded-lg px-3 py-2 focus:ring-2 focus:ring-cyan-600 outline-none"
 				/>
 			</div>
 
