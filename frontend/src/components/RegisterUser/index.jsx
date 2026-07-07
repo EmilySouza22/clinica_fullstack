@@ -63,7 +63,7 @@ const RegisterUser = () => {
 	};
 
 	return (
-		<div className="w-full max-w-md p-6 bg-white rounded-xl">
+		<div className="w-full max-w-md p-6 bg-white dark:bg-gray-800 rounded-xl">
 			<h2 className="text-2xl font-bold mb-6 text-center">Criar Usuário</h2>
 			<form onSubmit={handleSubmit}>
 				<fieldset>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import apiClient from '../../api/api';
 
@@ -9,7 +9,7 @@ const MedicalRecordList = () => {
 	useEffect(() => {
 		const fetchPatients = async () => {
 			try {
-				const response = await apiClient.get('/prontuarios');
+				const response = await apiClient.get('/patients');
 				setPatients(response.data);
 			} catch (error) {
 				console.error('Erro ao obter dados dos pacientes:', error);
@@ -31,14 +31,16 @@ const MedicalRecordList = () => {
 	});
 
 	return (
-		<section className="p-6 bg-gray-50 rounded-lg shadow-md">
-			<h2 className="text-2xl font-bold mb-6 text-gray-800">
+		<section className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
+			<h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
 				Listagem de Prontuários
 			</h2>
 
-			{/* Campo de busca */}
 			<div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-				<label htmlFor="search" className="text-gray-700 font-medium">
+				<label
+					htmlFor="search"
+					className="text-gray-700 dark:text-gray-300 font-medium"
+				>
 					Buscar Paciente:
 				</label>
 				<input
@@ -47,26 +49,27 @@ const MedicalRecordList = () => {
 					value={searchTerm}
 					onChange={handleSearchChange}
 					placeholder="Digite o nome ou identificador"
-					className="w-full sm:w-1/2 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
+					className="w-full sm:w-1/2 p-2 border border-gray-600 dark:border-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
 				/>
 			</div>
 
-			{/* Lista de pacientes */}
 			<ul className="space-y-4">
 				{filteredPatients.length > 0 ? (
 					filteredPatients.map((patient) => (
 						<li
 							key={patient.id}
-							className="p-4 bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow"
+							className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm border hover:shadow-md transition-shadow"
 						>
 							<p className="text-sm text-gray-500">
-								<strong className="text-gray-700">Registro:</strong>{' '}
+								<strong className="text-gray-700 dark:text-gray-300">
+									Registro:
+								</strong>{' '}
 								{patient.id}
 							</p>
-							<p className="text-gray-700">
+							<p className="text-gray-700 dark:text-gray-300">
 								<strong>Nome:</strong> {patient.fullName}
 							</p>
-							<p className="text-gray-700">
+							<p className="text-gray-700 dark:text-gray-300">
 								<strong>Convênio:</strong> {patient.healthInsurance}
 							</p>
 							<Link
@@ -78,7 +81,9 @@ const MedicalRecordList = () => {
 						</li>
 					))
 				) : (
-					<p className="text-gray-600">Nenhum paciente encontrado.</p>
+					<p className="text-gray-600 dark:text-gray-400">
+						Nenhum paciente encontrado.
+					</p>
 				)}
 			</ul>
 		</section>

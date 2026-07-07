@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import apiClient from '../../api/api';
 import { toast } from 'react-toastify';
+
+const INPUT_CLASSES =
+	'w-full border border-gray-600 dark:border-gray-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none';
 
 function RegisterFormExam() {
 	const [formData, setFormData] = useState({
@@ -15,21 +18,17 @@ function RegisterFormExam() {
 
 	const [isSaving, setIsSaving] = useState(false);
 
-	// handles
-
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
-
-	// submit form
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSaving(true);
 
 		try {
-			await apiClient.post('/exames', formData);
+			await apiClient.post('/exams', formData);
 
 			toast.success('Exame cadastrado com sucesso!', {
 				autoClose: 2000,
@@ -59,11 +58,10 @@ function RegisterFormExam() {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="space-y-6 text-gray-800"
+			className="space-y-6 text-gray-800 dark:text-gray-100"
 			autoComplete="off"
 		>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-				{/* Nome do Exame */}
 				<fieldset>
 					<label htmlFor="name" className="block text-sm font-medium mb-1">
 						Nome do Exame
@@ -75,11 +73,10 @@ function RegisterFormExam() {
 						value={formData.name}
 						onChange={handleInputChange}
 						required
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* Tipo do Exame */}
 				<fieldset>
 					<label htmlFor="type" className="block text-sm font-medium mb-1">
 						Tipo do Exame
@@ -91,11 +88,10 @@ function RegisterFormExam() {
 						value={formData.type}
 						onChange={handleInputChange}
 						required
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* Data */}
 				<fieldset>
 					<label htmlFor="date" className="block text-sm font-medium mb-1">
 						Data
@@ -107,11 +103,10 @@ function RegisterFormExam() {
 						value={formData.date}
 						onChange={handleInputChange}
 						required
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* Horário */}
 				<fieldset>
 					<label htmlFor="time" className="block text-sm font-medium mb-1">
 						Horário
@@ -123,11 +118,10 @@ function RegisterFormExam() {
 						value={formData.time}
 						onChange={handleInputChange}
 						required
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* Laboratório */}
 				<fieldset>
 					<label
 						htmlFor="laboratory"
@@ -142,11 +136,10 @@ function RegisterFormExam() {
 						value={formData.laboratory}
 						onChange={handleInputChange}
 						required
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* URL do Documento */}
 				<fieldset>
 					<label
 						htmlFor="documentUrl"
@@ -161,11 +154,10 @@ function RegisterFormExam() {
 						value={formData.documentUrl}
 						onChange={handleInputChange}
 						placeholder="https://"
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
+						className={INPUT_CLASSES}
 					/>
 				</fieldset>
 
-				{/* Resultados - ocupa largura total */}
 				<fieldset className="md:col-span-2">
 					<label htmlFor="results" className="block text-sm font-medium mb-1">
 						Resultados
@@ -176,7 +168,7 @@ function RegisterFormExam() {
 						value={formData.results}
 						onChange={handleInputChange}
 						rows={4}
-						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none resize-none"
+						className={`${INPUT_CLASSES} resize-none`}
 					/>
 				</fieldset>
 

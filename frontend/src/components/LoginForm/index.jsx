@@ -4,8 +4,6 @@ import { toast } from 'react-toastify'
 
 import { useNavigate } from 'react-router'
 
-import axios from 'axios'
-
 // Contexto
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -79,7 +77,7 @@ const LoginForm = () => {
 
 
     return (
-        <div className='max-w-md mx-auto mt-10 bg-white p-8 rounded-xl shadow-lg'>
+        <div className='max-w-md mx-auto mt-10 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg'>
             <h2 className='text-2xl font-bold text-center mb-6'>Login</h2>
 
             <form onSubmit={handleLogin} className='space-y-4'>

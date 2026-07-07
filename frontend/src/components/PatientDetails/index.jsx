@@ -20,6 +20,16 @@ const PatientDetails = () => {
 		(a, b) => new Date(a.date) - new Date(b.date),
 	);
 
+	const lastConsultDate = sortedConsults.length
+		? sortedConsults[sortedConsults.length - 1].date
+		: null;
+
+	const daysSinceLastConsult = lastConsultDate
+		? Math.floor(
+				(new Date() - new Date(lastConsultDate)) / (1000 * 60 * 60 * 24),
+			)
+		: null;
+
 	const [editConsultData, setEditConsultData] = useState({
 		reason: '',
 		date: '',
@@ -170,8 +180,8 @@ const PatientDetails = () => {
 
 	return (
 		<section className="p-6 max-w-5xl mx-auto">
-			<div className="bg-white rounded-2xl shadow-md p-6 mb-8 border border-gray-100">
-				<h2 className="text-2xl font-semibold text-gray-800 mb-2">
+			<div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 mb-8 border border-gray-100">
+				<h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
 					{patient.fullName}
 				</h2>
 				<p>
@@ -182,17 +192,23 @@ const PatientDetails = () => {
 					<span className="font-semibold">Alergias:</span>
 					{patient.allergies}
 				</p>
+				{daysSinceLastConsult !== null && (
+					<p>
+						<span className="font-semibold">Última consulta há:</span>{' '}
+						{daysSinceLastConsult} dias
+					</p>
+				)}
 			</div>
 			{/* Consultas */}
-			<div className="bg-white rounded-2xl shadow-md p-6 mb-8 border border-gray-100">
-				<h3 className="text-xl font-semibold text-gray-700 mb-4">
+			<div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 mb-8 border border-gray-100">
+				<h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
 					Histórico de Consultas
 				</h3>
 				{isEditingConsult ? (
 					<form onSubmit={handleUpdateConsult} className="space-y-4">
 						{Object.keys(editConsultData).map((key) => (
 							<div key={key}>
-								<label className="block text-sm font-medium text-gray-700 capitalize mb-1">
+								<label className="block text-sm font-medium text-gray-700 dark:text-gray-300 capitalize mb-1">
 									{key === 'dosagePrecautions'
 										? 'Dosagem e Precauções'
 										: key.charAt(0).toUpperCase() + key.slice(1)}
@@ -227,7 +243,7 @@ const PatientDetails = () => {
 							<button
 								type="button"
 								onClick={() => setIsEditingConsult(false)}
-								className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition"
+								className="bg-gray-300 hover:bg-gray-400 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg transition"
 							>
 								Cancelar
 							</button>
@@ -239,7 +255,7 @@ const PatientDetails = () => {
 					sortedConsults.map((c) => (
 						<div
 							key={c.id}
-							className="border rounded-xl p-4 mb-4 bg-gray-50 hover:bg-gray-100 transition"
+							className="border rounded-xl p-4 mb-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 transition"
 						>
 							<p>
 								<strong>Consulta:</strong> {c.reason}
@@ -276,15 +292,15 @@ const PatientDetails = () => {
 				)}
 			</div>
 			{/* Exames */}
-			<div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-				<h3 className="text-xl font-semibold text-gray-700 mb-4">
+			<div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 border border-gray-100">
+				<h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
 					Histórico de Exames
 				</h3>
 				{isEditingExam ? (
 					<form onSubmit={handleUpdateExam} className="space-y-4">
 						{Object.keys(editExamData).map((key) => (
 							<div key={key}>
-								<label className="block text-sm font-medium text-gray-700 capitalize mb-1">
+								<label className="block text-sm font-medium text-gray-700 dark:text-gray-300 capitalize mb-1">
 									{key === 'documentUrl'
 										? 'URL do Documento'
 										: key.charAt(0).toUpperCase() + key.slice(1)}
@@ -334,7 +350,7 @@ const PatientDetails = () => {
 							<button
 								type="button"
 								onClick={() => setIsEditingExam(false)}
-								className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition"
+								className="bg-gray-300 hover:bg-gray-400 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg transition"
 							>
 								Cancelar
 							</button>
@@ -346,7 +362,7 @@ const PatientDetails = () => {
 					sortedExams.map((exam) => (
 						<div
 							key={exam.id}
-							className="border rounded-xl p-4 mb-4 bg-gray-50 hover:bg-gray-100 transition"
+							className="border rounded-xl p-4 mb-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 transition"
 						>
 							<p>
 								<strong>Exame:</strong> {exam.name}
