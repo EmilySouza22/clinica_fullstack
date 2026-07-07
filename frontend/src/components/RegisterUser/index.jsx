@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import apiClient from '../../../api/api';
+import apiClient from '../../api/api';
 import { toast } from 'react-toastify';
-
-import axios from 'axios';
 
 const RegisterUser = () => {
 	// estados de controle dos campos
@@ -43,7 +41,7 @@ const RegisterUser = () => {
 		setIsSaving(true);
 
 		try {
-			await axios.post('http://localhost:3000/usuarios', {
+			await apiClient.post('/usuarios', {
 				email,
 				senha: password,
 			});

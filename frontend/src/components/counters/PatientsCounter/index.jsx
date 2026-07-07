@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import apiClient from '../../api/api';
+import apiClient from '../../../api/api';
 import { FaHospitalUser } from 'react-icons/fa';
 
 const PatientsCounter = () => {

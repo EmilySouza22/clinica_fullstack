@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../../../api/api';
+import apiClient from '../../api/api';
 import { toast } from 'react-toastify';
 
 import Modal from '../Modal';
@@ -96,7 +96,7 @@ function ConsultationForm() {
 				...formData,
 			};
 
-			await axios.post('http://localhost:3000/consults', dataToSave);
+			await apiClient.post('/consults', dataToSave);
 
 			toast.success('Consulta cadastrada com sucesso!', {
 				autoClose: 2000,
@@ -106,7 +106,7 @@ function ConsultationForm() {
 			resetForm();
 			handleCloseModal();
 		} catch (error) {
-			console.error('Erro ao cadastrar consulta!');
+			console.error('Erro ao cadastrar consulta!', error);
 			toast.error('Erro ao cadastrar consulta!', {
 				autoClose: 2000,
 				hideProgressBar: true,
