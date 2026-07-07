@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import apiClient from '../../api/api';
 import { toast } from 'react-toastify';
 
@@ -51,6 +51,7 @@ function ConsultationForm() {
 	//seleciona o paciente  e abre modal
 
 	const handleSelectPatient = (patient) => {
+		resetForm();
 		setSelectedPatient(patient);
 		setIsModalOpen(true);
 	};
@@ -88,15 +89,10 @@ function ConsultationForm() {
 		e.preventDefault();
 		if (!selectedPatient) return;
 
+		setIsSaving(true);
 		try {
-			setIsSaving(true);
-
-			const dataToSave = {
-				patientId: selectedPatient.id,
-				...formData,
-			};
-
-			await apiClient.post('/consults', dataToSave);
+			const dataToSave = { patientId: selectedPatient.id, ...formData };
+			await apiClient.post('/consultas', dataToSave);
 
 			toast.success('Consulta cadastrada com sucesso!', {
 				autoClose: 2000,
@@ -111,6 +107,8 @@ function ConsultationForm() {
 				autoClose: 2000,
 				hideProgressBar: true,
 			});
+		} finally {
+			setIsSaving(false);
 		}
 	};
 
