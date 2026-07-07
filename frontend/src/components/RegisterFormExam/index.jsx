@@ -179,6 +179,18 @@ function RegisterFormExam() {
 						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none resize-none"
 					/>
 				</fieldset>
+
+				<button
+					type="submit"
+					disabled={isSaving}
+					className={`w-full p-2 rounded-lg text-white ${
+						isSaving
+							? 'bg-gray-400 cursor-not-allowed'
+							: 'bg-cyan-600 hover:bg-cyan-700'
+					} transition-colors`}
+				>
+					{isSaving ? 'Salvando ...' : 'Cadastrar Exame'}
+				</button>
 			</div>
 		</form>
 	);
