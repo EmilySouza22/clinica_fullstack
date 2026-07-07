@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // url base
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://localhost:3001'
 });
 
 // apiClient.get('/cadastro')
