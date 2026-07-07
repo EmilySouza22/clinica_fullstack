@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 import apiClient from '../../api/api';
-import { toast } from 'react-toastify';
-
 import { IMaskInput } from 'react-imask';
+import { toast } from 'react-toastify';
 
 function RegisterFormPatient() {
 	const [formData, setFormData] = useState({
@@ -55,6 +55,13 @@ function RegisterFormPatient() {
 	const fetchAddressData = async (cep) => {
 		try {
 			const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
+			if (data.erro) {
+				toast.error('CEP não encontrado.', {
+					autoClose: 2000,
+					hideProgressBar: true,
+				});
+				return;
+			}
 			setFormData((prev) => ({
 				...prev,
 				address: {
@@ -67,8 +74,11 @@ function RegisterFormPatient() {
 					neighborhood: data.bairro || '',
 				},
 			}));
-		} catch (error) {
-			console.log('Erro ao buscar endereço', error);
+		} catch {
+			toast.error('Erro ao buscar CEP.', {
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
 		}
 	};
 
@@ -81,27 +91,8 @@ function RegisterFormPatient() {
 
 	//validação da data de nascimento
 
-	const yesterday = new Date(); // retorna nesse exemplo => Mon Jun 15 2026 14:30:00 GMT-0300
+	const yesterday = new Date();
 	yesterday.setDate(yesterday.getDate() - 1); // retorna o dia atual menos um (ontem)
-
-	//toISOString retorna uma string no formato 2026-06-14T17:30:00.000Z
-	/*
-    2026-06-14 → data
-    T → separador
-    17:30:00.000Z → horário UTC
-    */
-
-	/*
-    .split("T")[0]
-    separa a string no caractere T
-    E pega a primeira parte do do índice devolvido, no caso "2026-06-14"
-
-    <input
-        type="date"
-        max="2026-06-14"
-    />
-
-    */
 
 	const maxBirthDate = yesterday.toISOString().split('T')[0];
 
@@ -109,19 +100,6 @@ function RegisterFormPatient() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		// const selectedDate = new Date(formData.birthdate)
-
-		// const today = new Date()
-		// today.setHours(0, 0, 0, 0)
-
-		// if (selectedDate >= today) {
-		//     toast.error("A data de nascimento deve ser anterior à data atual.", {
-		//         autoClose: 2000,
-		//         hideProgressBar: true
-		//     })
-		//     return
-		// }
 
 		setIsSaving(true);
 
@@ -166,6 +144,8 @@ function RegisterFormPatient() {
 				autoClose: 2000,
 				hideProgressBar: true,
 			});
+		} finally {
+			setIsSaving(false);
 		}
 	};
 
@@ -238,7 +218,6 @@ function RegisterFormPatient() {
 					<IMaskInput
 						mask="000.000.000-00"
 						name="cpf"
-						minLength={14}
 						id="cpf"
 						value={formData.cpf}
 						onAccept={(value) =>
@@ -572,8 +551,7 @@ function RegisterFormPatient() {
 						name="state"
 						id="state"
 						value={formData.address.state}
-						onChange={handleAddressChange}
-						disabled="true"
+						disabled
 						className="w-full border p-2 rounded-lg focus:ring-2 focus:ring-cyan-600 outline-none"
 					/>
 				</fieldset>
