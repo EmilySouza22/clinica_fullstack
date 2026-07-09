@@ -98,10 +98,13 @@ const PatientDetails = () => {
 				...editConsultData,
 			};
 
-			await apiClient.put(`/consults/${editingConsult.id}`, updatedConsult);
+			const response = await apiClient.put(
+				`/consults/${editingConsult.id}`,
+				updatedConsult,
+			);
 
 			setConsults((prev) =>
-				prev.map((c) => (c.id === editingConsult.id ? updatedConsult : c)),
+				prev.map((c) => (c.id === editingConsult.id ? response.data : c)),
 			);
 
 			toast.success('Consulta atualizada com sucesso!');
@@ -143,10 +146,7 @@ const PatientDetails = () => {
 		try {
 			if (!editingExam) return;
 
-			const updatedExam = {
-				...editingExam,
-				...editExamData,
-			};
+			const updatedExam = { ...editingExam, ...editExamData };
 
 			const response = await apiClient.put(
 				`/exams/${editingExam.id}`,
