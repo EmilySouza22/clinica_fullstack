@@ -27,12 +27,18 @@ Este projeto é uma aplicação fullstack para gestão de clínicas, com foco em
 
 ## Estrutura
 
+```text
 clinica_fullstack/
-backend/
-src/
-prisma/
-frontend/
-src/
+├── backend/
+│   ├── postman/
+│   ├── src/
+│   │   ├── prisma/
+├── frontend/
+│   ├── docs/
+│   ├── src/
+├── .gitignore
+└── README.md
+```
 
 ## Instalação e execução
 
