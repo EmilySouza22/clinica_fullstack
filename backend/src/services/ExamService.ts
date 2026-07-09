@@ -1,43 +1,49 @@
-import type { Exame, } from "../prisma/generated/prisma/client";
-import { examRepository, type ExamRepository } from "../repositories/ExamRepository";
-import { Prisma } from "../prisma/generated/prisma/client";
+import type { Exame } from '../prisma/generated/prisma/client';
+import {
+	examRepository,
+	type ExamRepository,
+} from '../repositories/ExamRepository';
+import {
+	mapExamPayloadToDb,
+	mapExamPayloadToDbPartial,
+} from '../utils/dataMappers';
+
 type ExamPayload = Partial<Exame> & Record<string, unknown>;
+
 export class ExamService {
-    constructor(private readonly repository: ExamRepository) { // TO-DO TIPAR SERVICE
-    }
+	constructor(private readonly repository: ExamRepository) {}
 
-    async listarTodosExames(pagina?: number, limite?: number) {
-        const exames = await this.repository.listarTodosExames(pagina, limite)
-        return exames
-    }
+	async listarTodosExames(
+		pagina?: number,
+		limite?: number,
+		pacienteId?: number,
+	) {
+		return await this.repository.listarTodosExames(pagina, limite, pacienteId);
+	}
 
-    async criarExame(dadosExame: Exame) {
+	async criarExame(dadosExame: ExamPayload) {
+		const exame = mapExamPayloadToDb(dadosExame);
+		return await this.repository.criarExame(exame);
+	}
 
-        const exameCriado = await this.repository.criarExame({
-            tipo_exame: dadosExame.tipo_exame,
-            valor: dadosExame.valor,
-            descricao: dadosExame.descricao,
-            data_exame: new Date(dadosExame.data_exame),
-            resultado: dadosExame.resultado
-        })
-        return exameCriado
-    }
+	async buscarExameId(idExame: number) {
+		return await this.repository.buscarExameId(idExame);
+	}
 
-    async buscarExameId(idExame: number) {
-        const exame = await this.repository.buscarExameId(idExame);
-        return exame;
-    }
+	async atualizarExame(
+		idExame: number,
+		dadosParaAtualizar: Record<string, unknown>,
+	) {
+		const exame = mapExamPayloadToDbPartial(dadosParaAtualizar);
+		return await this.repository.atualizarExame(
+			idExame,
+			exame as Omit<Exame, 'id'>,
+		);
+	}
 
-    async atualizarExame(idExame: number, dadosParaAtualizar: Omit<Exame, 'id'>) {
-        const exameAtualizado = await this.repository.atualizarExame(idExame, dadosParaAtualizar)
-        return exameAtualizado;
-    }
-
-
-    async deletarExame(idExame: number) {
-        const exame = await this.repository.deletarExame(idExame);
-        return exame;
-    }
+	async deletarExame(idExame: number) {
+		return await this.repository.deletarExame(idExame);
+	}
 }
 
-export const examService = new ExamService(examRepository)
+export const examService = new ExamService(examRepository);

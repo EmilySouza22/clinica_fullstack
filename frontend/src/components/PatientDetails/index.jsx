@@ -148,10 +148,13 @@ const PatientDetails = () => {
 				...editExamData,
 			};
 
-			await apiClient.put(`/exams/${editingExam.id}`, updatedExam);
+			const response = await apiClient.put(
+				`/exams/${editingExam.id}`,
+				updatedExam,
+			);
 
 			setExams((prev) =>
-				prev.map((exam) => (exam.id === editingExam.id ? updatedExam : exam)),
+				prev.map((exam) => (exam.id === editingExam.id ? response.data : exam)),
 			);
 
 			toast.success('Exame atualizado com sucesso!');

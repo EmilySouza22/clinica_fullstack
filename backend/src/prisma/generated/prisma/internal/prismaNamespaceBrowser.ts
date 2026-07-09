@@ -127,6 +127,8 @@ export const ConsultaScalarFieldEnum = {
   motivo: 'motivo',
   data_consulta: 'data_consulta',
   observacoes: 'observacoes',
+  medicamento: 'medicamento',
+  precaucoes_dosagem: 'precaucoes_dosagem',
   medico_responsavel_id: 'medico_responsavel_id',
   paciente_id: 'paciente_id'
 } as const

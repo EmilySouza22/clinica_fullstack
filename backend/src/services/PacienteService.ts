@@ -3,6 +3,8 @@ import {
 	pacienteRepository,
 	type PacienteRepository,
 } from '../repositories/PacienteRepository';
+import { mapPacientePayloadToDbPartial } from '../utils/dataMappers';
+
 type PacientePayload = Partial<Paciente> & Record<string, unknown>;
 export class PacienteService {
 	constructor(private readonly repository: PacienteRepository) {}
@@ -62,12 +64,10 @@ export class PacienteService {
 
 	async atualizarPaciente(
 		idPaciente: number,
-		dadosParaAtualizar: Omit<Paciente, 'id'>,
+		dadosParaAtualizar: Record<string, unknown>,
 	) {
-		return await this.repository.atualizarPaciente(
-			idPaciente,
-			dadosParaAtualizar,
-		);
+		const dados = mapPacientePayloadToDbPartial(dadosParaAtualizar);
+		return await this.repository.atualizarPaciente(idPaciente, dados);
 	}
 
 	async deletarPaciente(idPaciente: number) {

@@ -5,9 +5,9 @@ const apiClient = axios.create({
 });
 
 const legacyRoutes = [
-	{ from: /^\/patients(?:\/|$)/, to: '/pacientes' },
-	{ from: /^\/consults(?:\/|$)/, to: '/consultas' },
-	{ from: /^\/exams(?:\/|$)/, to: '/exames' },
+	{ from: /^\/patients(\/|\?|$)/, to: '/pacientes$1' },
+	{ from: /^\/consults(\/|\?|$)/, to: '/consultas$1' },
+	{ from: /^\/exams(\/|\?|$)/, to: '/exames$1' },
 ];
 
 const resolveUrl = (url = '') => {

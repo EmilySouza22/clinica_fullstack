@@ -1,66 +1,87 @@
-import type { Request, Response } from "express";
-import type { Paciente } from "../prisma/generated/prisma/client";
-import { pacienteService, PacienteService } from "../services/PacienteService";
+import type { Request, Response } from 'express';
+import type { Paciente } from '../prisma/generated/prisma/client';
+import { pacienteService, PacienteService } from '../services/PacienteService';
+import { transformPacienteResponse } from '../utils/dataMappers';
 
 class PacienteController {
-    constructor(private readonly service: PacienteService) {}
+	constructor(private readonly service: PacienteService) {}
 
-    async listarTodosPacientes(req: Request, res: Response) {
-        try {
-            const pagina = req.query.pagina ? Number(req.query.pagina) : undefined
-            const limite = req.query.limite ? Number(req.query.limite) : undefined
-            const pacientes = await this.service.listarTodosPacientes(pagina, limite)
-            return res.status(200).json(pacientes)
-        } catch (error) {
-            console.log(error)
-            return res.status(404).json({ error })
-        }
-    }
+	async listarTodosPacientes(req: Request, res: Response) {
+		try {
+			const pagina = req.query.pagina ? Number(req.query.pagina) : undefined;
+			const limite = req.query.limite ? Number(req.query.limite) : undefined;
+			const pacientes = await this.service.listarTodosPacientes(pagina, limite);
 
-    async criarPaciente(req: Request, res: Response) {
-        try {
-            const dadosPaciente = req.body as Paciente
-            const pacienteCriado = await this.service.criarPaciente(dadosPaciente)
-            return res.status(201).json(pacienteCriado)
-        } catch (error) {
-            console.log(error)
-            return res.status(404).json({ error })
-        }
-    }
+			if (Array.isArray(pacientes)) {
+				return res.status(200).json(pacientes.map(transformPacienteResponse));
+			}
 
-    async buscarPacienteId(req: Request, res: Response) {
-        try {
-            const idPaciente = Number(req.params.id)
-            const paciente = await this.service.buscarPacientePorId(idPaciente)
-            return res.status(200).json(paciente)
-        } catch (error) {
-            console.log(error)
-            return res.status(404).json({ error })
-        }
-    }
+			return res.status(200).json({
+				...pacientes,
+				pacientes: pacientes.pacientes.map(transformPacienteResponse),
+			});
+		} catch (error) {
+			console.log(error);
+			return res.status(404).json({ error });
+		}
+	}
 
-    async atualizarPaciente(req: Request, res: Response) {
-        try {
-            const idPaciente = Number(req.params.id)
-            const dadosParaAtualizar = req.body as Omit<Paciente, 'id'>
-            const pacienteAtualizado = await this.service.atualizarPaciente(idPaciente, dadosParaAtualizar)
-            return res.status(200).json(pacienteAtualizado)
-        } catch (error) {
-            console.log(error)
-            return res.status(404).json({ error })
-        }
-    }
+	async criarPaciente(req: Request, res: Response) {
+		try {
+			const dadosPaciente = req.body as Paciente;
+			const pacienteCriado = await this.service.criarPaciente(dadosPaciente);
+			return res.status(201).json(transformPacienteResponse(pacienteCriado));
+		} catch (error) {
+			console.log(error);
+			return res.status(404).json({ error });
+		}
+	}
 
-    async deletarPaciente(req: Request, res: Response) {
-        try {
-            const idPaciente = Number(req.params.id)
-            await this.service.deletarPaciente(idPaciente)
-            return res.status(200).json({ message: "Paciente deletado com sucesso!" })
-        } catch (error) {
-            console.log(error)
-            return res.status(404).json({ error })
-        }
-    }
+	async buscarPacienteId(req: Request, res: Response) {
+		try {
+			const idPaciente = Number(req.params.id);
+			const paciente = await this.service.buscarPacientePorId(idPaciente);
+
+			if (!paciente) {
+				return res.status(404).json({ error: 'Paciente não encontrado' });
+			}
+
+			return res.status(200).json(transformPacienteResponse(paciente));
+		} catch (error) {
+			console.log(error);
+			return res.status(404).json({ error });
+		}
+	}
+
+	async atualizarPaciente(req: Request, res: Response) {
+		try {
+			const idPaciente = Number(req.params.id);
+			const dadosParaAtualizar = req.body as Record<string, unknown>;
+			const pacienteAtualizado = await this.service.atualizarPaciente(
+				idPaciente,
+				dadosParaAtualizar,
+			);
+			return res
+				.status(200)
+				.json(transformPacienteResponse(pacienteAtualizado));
+		} catch (error) {
+			console.log(error);
+			return res.status(404).json({ error });
+		}
+	}
+
+	async deletarPaciente(req: Request, res: Response) {
+		try {
+			const idPaciente = Number(req.params.id);
+			await this.service.deletarPaciente(idPaciente);
+			return res
+				.status(200)
+				.json({ message: 'Paciente deletado com sucesso!' });
+		} catch (error) {
+			console.log(error);
+			return res.status(404).json({ error });
+		}
+	}
 }
 
-export const pacienteController = new PacienteController(pacienteService)
+export const pacienteController = new PacienteController(pacienteService);
