@@ -38,33 +38,81 @@ export type PacienteMinAggregateOutputType = {
   id: number | null
   nome: string | null
   cpf: string | null
+  rg: string | null
   telefone: string | null
   email: string | null
   data_nascimento: Date | null
   sexo: string | null
+  estado_civil: string | null
+  naturalidade: string | null
   responsavel: string | null
+  alergias: string | null
+  cuidados_especiais: string | null
+  convenio: string | null
+  numero_carteira: string | null
+  validade_carteira: Date | null
+  cep: string | null
+  cidade: string | null
+  estado: string | null
+  logradouro: string | null
+  numero: string | null
+  complemento: string | null
+  bairro: string | null
+  referencia: string | null
 }
 
 export type PacienteMaxAggregateOutputType = {
   id: number | null
   nome: string | null
   cpf: string | null
+  rg: string | null
   telefone: string | null
   email: string | null
   data_nascimento: Date | null
   sexo: string | null
+  estado_civil: string | null
+  naturalidade: string | null
   responsavel: string | null
+  alergias: string | null
+  cuidados_especiais: string | null
+  convenio: string | null
+  numero_carteira: string | null
+  validade_carteira: Date | null
+  cep: string | null
+  cidade: string | null
+  estado: string | null
+  logradouro: string | null
+  numero: string | null
+  complemento: string | null
+  bairro: string | null
+  referencia: string | null
 }
 
 export type PacienteCountAggregateOutputType = {
   id: number
   nome: number
   cpf: number
+  rg: number
   telefone: number
   email: number
   data_nascimento: number
   sexo: number
+  estado_civil: number
+  naturalidade: number
   responsavel: number
+  alergias: number
+  cuidados_especiais: number
+  convenio: number
+  numero_carteira: number
+  validade_carteira: number
+  cep: number
+  cidade: number
+  estado: number
+  logradouro: number
+  numero: number
+  complemento: number
+  bairro: number
+  referencia: number
   _all: number
 }
 
@@ -81,33 +129,81 @@ export type PacienteMinAggregateInputType = {
   id?: true
   nome?: true
   cpf?: true
+  rg?: true
   telefone?: true
   email?: true
   data_nascimento?: true
   sexo?: true
+  estado_civil?: true
+  naturalidade?: true
   responsavel?: true
+  alergias?: true
+  cuidados_especiais?: true
+  convenio?: true
+  numero_carteira?: true
+  validade_carteira?: true
+  cep?: true
+  cidade?: true
+  estado?: true
+  logradouro?: true
+  numero?: true
+  complemento?: true
+  bairro?: true
+  referencia?: true
 }
 
 export type PacienteMaxAggregateInputType = {
   id?: true
   nome?: true
   cpf?: true
+  rg?: true
   telefone?: true
   email?: true
   data_nascimento?: true
   sexo?: true
+  estado_civil?: true
+  naturalidade?: true
   responsavel?: true
+  alergias?: true
+  cuidados_especiais?: true
+  convenio?: true
+  numero_carteira?: true
+  validade_carteira?: true
+  cep?: true
+  cidade?: true
+  estado?: true
+  logradouro?: true
+  numero?: true
+  complemento?: true
+  bairro?: true
+  referencia?: true
 }
 
 export type PacienteCountAggregateInputType = {
   id?: true
   nome?: true
   cpf?: true
+  rg?: true
   telefone?: true
   email?: true
   data_nascimento?: true
   sexo?: true
+  estado_civil?: true
+  naturalidade?: true
   responsavel?: true
+  alergias?: true
+  cuidados_especiais?: true
+  convenio?: true
+  numero_carteira?: true
+  validade_carteira?: true
+  cep?: true
+  cidade?: true
+  estado?: true
+  logradouro?: true
+  numero?: true
+  complemento?: true
+  bairro?: true
+  referencia?: true
   _all?: true
 }
 
@@ -201,11 +297,27 @@ export type PacienteGroupByOutputType = {
   id: number
   nome: string
   cpf: string
+  rg: string | null
   telefone: string
   email: string
   data_nascimento: Date
   sexo: string
+  estado_civil: string | null
+  naturalidade: string | null
   responsavel: string | null
+  alergias: string | null
+  cuidados_especiais: string | null
+  convenio: string | null
+  numero_carteira: string | null
+  validade_carteira: Date | null
+  cep: string | null
+  cidade: string | null
+  estado: string | null
+  logradouro: string | null
+  numero: string | null
+  complemento: string | null
+  bairro: string | null
+  referencia: string | null
   _count: PacienteCountAggregateOutputType | null
   _avg: PacienteAvgAggregateOutputType | null
   _sum: PacienteSumAggregateOutputType | null
@@ -235,11 +347,27 @@ export type PacienteWhereInput = {
   id?: Prisma.IntFilter<"Paciente"> | number
   nome?: Prisma.StringFilter<"Paciente"> | string
   cpf?: Prisma.StringFilter<"Paciente"> | string
+  rg?: Prisma.StringNullableFilter<"Paciente"> | string | null
   telefone?: Prisma.StringFilter<"Paciente"> | string
   email?: Prisma.StringFilter<"Paciente"> | string
   data_nascimento?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   sexo?: Prisma.StringFilter<"Paciente"> | string
+  estado_civil?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  naturalidade?: Prisma.StringNullableFilter<"Paciente"> | string | null
   responsavel?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  alergias?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  cuidados_especiais?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  convenio?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  numero_carteira?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  validade_carteira?: Prisma.DateTimeNullableFilter<"Paciente"> | Date | string | null
+  cep?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  cidade?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  estado?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  logradouro?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  numero?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  complemento?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  bairro?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  referencia?: Prisma.StringNullableFilter<"Paciente"> | string | null
   Prontuario?: Prisma.ProntuarioListRelationFilter
   Consulta?: Prisma.ConsultaListRelationFilter
   Exame?: Prisma.ExameListRelationFilter
@@ -249,11 +377,27 @@ export type PacienteOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   cpf?: Prisma.SortOrder
+  rg?: Prisma.SortOrderInput | Prisma.SortOrder
   telefone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   data_nascimento?: Prisma.SortOrder
   sexo?: Prisma.SortOrder
+  estado_civil?: Prisma.SortOrderInput | Prisma.SortOrder
+  naturalidade?: Prisma.SortOrderInput | Prisma.SortOrder
   responsavel?: Prisma.SortOrderInput | Prisma.SortOrder
+  alergias?: Prisma.SortOrderInput | Prisma.SortOrder
+  cuidados_especiais?: Prisma.SortOrderInput | Prisma.SortOrder
+  convenio?: Prisma.SortOrderInput | Prisma.SortOrder
+  numero_carteira?: Prisma.SortOrderInput | Prisma.SortOrder
+  validade_carteira?: Prisma.SortOrderInput | Prisma.SortOrder
+  cep?: Prisma.SortOrderInput | Prisma.SortOrder
+  cidade?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  logradouro?: Prisma.SortOrderInput | Prisma.SortOrder
+  numero?: Prisma.SortOrderInput | Prisma.SortOrder
+  complemento?: Prisma.SortOrderInput | Prisma.SortOrder
+  bairro?: Prisma.SortOrderInput | Prisma.SortOrder
+  referencia?: Prisma.SortOrderInput | Prisma.SortOrder
   Prontuario?: Prisma.ProntuarioOrderByRelationAggregateInput
   Consulta?: Prisma.ConsultaOrderByRelationAggregateInput
   Exame?: Prisma.ExameOrderByRelationAggregateInput
@@ -266,11 +410,27 @@ export type PacienteWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PacienteWhereInput | Prisma.PacienteWhereInput[]
   nome?: Prisma.StringFilter<"Paciente"> | string
   cpf?: Prisma.StringFilter<"Paciente"> | string
+  rg?: Prisma.StringNullableFilter<"Paciente"> | string | null
   telefone?: Prisma.StringFilter<"Paciente"> | string
   email?: Prisma.StringFilter<"Paciente"> | string
   data_nascimento?: Prisma.DateTimeFilter<"Paciente"> | Date | string
   sexo?: Prisma.StringFilter<"Paciente"> | string
+  estado_civil?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  naturalidade?: Prisma.StringNullableFilter<"Paciente"> | string | null
   responsavel?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  alergias?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  cuidados_especiais?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  convenio?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  numero_carteira?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  validade_carteira?: Prisma.DateTimeNullableFilter<"Paciente"> | Date | string | null
+  cep?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  cidade?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  estado?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  logradouro?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  numero?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  complemento?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  bairro?: Prisma.StringNullableFilter<"Paciente"> | string | null
+  referencia?: Prisma.StringNullableFilter<"Paciente"> | string | null
   Prontuario?: Prisma.ProntuarioListRelationFilter
   Consulta?: Prisma.ConsultaListRelationFilter
   Exame?: Prisma.ExameListRelationFilter
@@ -280,11 +440,27 @@ export type PacienteOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   cpf?: Prisma.SortOrder
+  rg?: Prisma.SortOrderInput | Prisma.SortOrder
   telefone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   data_nascimento?: Prisma.SortOrder
   sexo?: Prisma.SortOrder
+  estado_civil?: Prisma.SortOrderInput | Prisma.SortOrder
+  naturalidade?: Prisma.SortOrderInput | Prisma.SortOrder
   responsavel?: Prisma.SortOrderInput | Prisma.SortOrder
+  alergias?: Prisma.SortOrderInput | Prisma.SortOrder
+  cuidados_especiais?: Prisma.SortOrderInput | Prisma.SortOrder
+  convenio?: Prisma.SortOrderInput | Prisma.SortOrder
+  numero_carteira?: Prisma.SortOrderInput | Prisma.SortOrder
+  validade_carteira?: Prisma.SortOrderInput | Prisma.SortOrder
+  cep?: Prisma.SortOrderInput | Prisma.SortOrder
+  cidade?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  logradouro?: Prisma.SortOrderInput | Prisma.SortOrder
+  numero?: Prisma.SortOrderInput | Prisma.SortOrder
+  complemento?: Prisma.SortOrderInput | Prisma.SortOrder
+  bairro?: Prisma.SortOrderInput | Prisma.SortOrder
+  referencia?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PacienteCountOrderByAggregateInput
   _avg?: Prisma.PacienteAvgOrderByAggregateInput
   _max?: Prisma.PacienteMaxOrderByAggregateInput
@@ -299,21 +475,53 @@ export type PacienteScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Paciente"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
   cpf?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
+  rg?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   telefone?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
   email?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
   data_nascimento?: Prisma.DateTimeWithAggregatesFilter<"Paciente"> | Date | string
   sexo?: Prisma.StringWithAggregatesFilter<"Paciente"> | string
+  estado_civil?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  naturalidade?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
   responsavel?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  alergias?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  cuidados_especiais?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  convenio?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  numero_carteira?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  validade_carteira?: Prisma.DateTimeNullableWithAggregatesFilter<"Paciente"> | Date | string | null
+  cep?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  cidade?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  estado?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  logradouro?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  numero?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  complemento?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  bairro?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
+  referencia?: Prisma.StringNullableWithAggregatesFilter<"Paciente"> | string | null
 }
 
 export type PacienteCreateInput = {
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioCreateNestedManyWithoutPacienteInput
   Consulta?: Prisma.ConsultaCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameCreateNestedManyWithoutPacienteInput
@@ -323,11 +531,27 @@ export type PacienteUncheckedCreateInput = {
   id?: number
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioUncheckedCreateNestedManyWithoutPacienteInput
   Consulta?: Prisma.ConsultaUncheckedCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameUncheckedCreateNestedManyWithoutPacienteInput
@@ -336,11 +560,27 @@ export type PacienteUncheckedCreateInput = {
 export type PacienteUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUpdateManyWithoutPacienteNestedInput
   Consulta?: Prisma.ConsultaUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUpdateManyWithoutPacienteNestedInput
@@ -350,11 +590,27 @@ export type PacienteUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUncheckedUpdateManyWithoutPacienteNestedInput
   Consulta?: Prisma.ConsultaUncheckedUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUncheckedUpdateManyWithoutPacienteNestedInput
@@ -364,32 +620,80 @@ export type PacienteCreateManyInput = {
   id?: number
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
 }
 
 export type PacienteUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PacienteUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type PacienteNullableScalarRelationFilter = {
@@ -406,11 +710,27 @@ export type PacienteCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   cpf?: Prisma.SortOrder
+  rg?: Prisma.SortOrder
   telefone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   data_nascimento?: Prisma.SortOrder
   sexo?: Prisma.SortOrder
+  estado_civil?: Prisma.SortOrder
+  naturalidade?: Prisma.SortOrder
   responsavel?: Prisma.SortOrder
+  alergias?: Prisma.SortOrder
+  cuidados_especiais?: Prisma.SortOrder
+  convenio?: Prisma.SortOrder
+  numero_carteira?: Prisma.SortOrder
+  validade_carteira?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  logradouro?: Prisma.SortOrder
+  numero?: Prisma.SortOrder
+  complemento?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  referencia?: Prisma.SortOrder
 }
 
 export type PacienteAvgOrderByAggregateInput = {
@@ -421,22 +741,54 @@ export type PacienteMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   cpf?: Prisma.SortOrder
+  rg?: Prisma.SortOrder
   telefone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   data_nascimento?: Prisma.SortOrder
   sexo?: Prisma.SortOrder
+  estado_civil?: Prisma.SortOrder
+  naturalidade?: Prisma.SortOrder
   responsavel?: Prisma.SortOrder
+  alergias?: Prisma.SortOrder
+  cuidados_especiais?: Prisma.SortOrder
+  convenio?: Prisma.SortOrder
+  numero_carteira?: Prisma.SortOrder
+  validade_carteira?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  logradouro?: Prisma.SortOrder
+  numero?: Prisma.SortOrder
+  complemento?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  referencia?: Prisma.SortOrder
 }
 
 export type PacienteMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   cpf?: Prisma.SortOrder
+  rg?: Prisma.SortOrder
   telefone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   data_nascimento?: Prisma.SortOrder
   sexo?: Prisma.SortOrder
+  estado_civil?: Prisma.SortOrder
+  naturalidade?: Prisma.SortOrder
   responsavel?: Prisma.SortOrder
+  alergias?: Prisma.SortOrder
+  cuidados_especiais?: Prisma.SortOrder
+  convenio?: Prisma.SortOrder
+  numero_carteira?: Prisma.SortOrder
+  validade_carteira?: Prisma.SortOrder
+  cep?: Prisma.SortOrder
+  cidade?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  logradouro?: Prisma.SortOrder
+  numero?: Prisma.SortOrder
+  complemento?: Prisma.SortOrder
+  bairro?: Prisma.SortOrder
+  referencia?: Prisma.SortOrder
 }
 
 export type PacienteSumOrderByAggregateInput = {
@@ -490,11 +842,27 @@ export type PacienteUpdateOneRequiredWithoutConsultaNestedInput = {
 export type PacienteCreateWithoutExameInput = {
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioCreateNestedManyWithoutPacienteInput
   Consulta?: Prisma.ConsultaCreateNestedManyWithoutPacienteInput
 }
@@ -503,11 +871,27 @@ export type PacienteUncheckedCreateWithoutExameInput = {
   id?: number
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioUncheckedCreateNestedManyWithoutPacienteInput
   Consulta?: Prisma.ConsultaUncheckedCreateNestedManyWithoutPacienteInput
 }
@@ -531,11 +915,27 @@ export type PacienteUpdateToOneWithWhereWithoutExameInput = {
 export type PacienteUpdateWithoutExameInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUpdateManyWithoutPacienteNestedInput
   Consulta?: Prisma.ConsultaUpdateManyWithoutPacienteNestedInput
 }
@@ -544,11 +944,27 @@ export type PacienteUncheckedUpdateWithoutExameInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUncheckedUpdateManyWithoutPacienteNestedInput
   Consulta?: Prisma.ConsultaUncheckedUpdateManyWithoutPacienteNestedInput
 }
@@ -556,11 +972,27 @@ export type PacienteUncheckedUpdateWithoutExameInput = {
 export type PacienteCreateWithoutProntuarioInput = {
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Consulta?: Prisma.ConsultaCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameCreateNestedManyWithoutPacienteInput
 }
@@ -569,11 +1001,27 @@ export type PacienteUncheckedCreateWithoutProntuarioInput = {
   id?: number
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Consulta?: Prisma.ConsultaUncheckedCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameUncheckedCreateNestedManyWithoutPacienteInput
 }
@@ -597,11 +1045,27 @@ export type PacienteUpdateToOneWithWhereWithoutProntuarioInput = {
 export type PacienteUpdateWithoutProntuarioInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Consulta?: Prisma.ConsultaUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUpdateManyWithoutPacienteNestedInput
 }
@@ -610,11 +1074,27 @@ export type PacienteUncheckedUpdateWithoutProntuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Consulta?: Prisma.ConsultaUncheckedUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUncheckedUpdateManyWithoutPacienteNestedInput
 }
@@ -622,11 +1102,27 @@ export type PacienteUncheckedUpdateWithoutProntuarioInput = {
 export type PacienteCreateWithoutConsultaInput = {
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameCreateNestedManyWithoutPacienteInput
 }
@@ -635,11 +1131,27 @@ export type PacienteUncheckedCreateWithoutConsultaInput = {
   id?: number
   nome: string
   cpf: string
+  rg?: string | null
   telefone: string
   email: string
   data_nascimento: Date | string
   sexo: string
+  estado_civil?: string | null
+  naturalidade?: string | null
   responsavel?: string | null
+  alergias?: string | null
+  cuidados_especiais?: string | null
+  convenio?: string | null
+  numero_carteira?: string | null
+  validade_carteira?: Date | string | null
+  cep?: string | null
+  cidade?: string | null
+  estado?: string | null
+  logradouro?: string | null
+  numero?: string | null
+  complemento?: string | null
+  bairro?: string | null
+  referencia?: string | null
   Prontuario?: Prisma.ProntuarioUncheckedCreateNestedManyWithoutPacienteInput
   Exame?: Prisma.ExameUncheckedCreateNestedManyWithoutPacienteInput
 }
@@ -663,11 +1175,27 @@ export type PacienteUpdateToOneWithWhereWithoutConsultaInput = {
 export type PacienteUpdateWithoutConsultaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUpdateManyWithoutPacienteNestedInput
 }
@@ -676,11 +1204,27 @@ export type PacienteUncheckedUpdateWithoutConsultaInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  rg?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   telefone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   data_nascimento?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sexo?: Prisma.StringFieldUpdateOperationsInput | string
+  estado_civil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  naturalidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   responsavel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alergias?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cuidados_especiais?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convenio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero_carteira?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validade_carteira?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cep?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cidade?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logradouro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  numero?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  complemento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bairro?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referencia?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Prontuario?: Prisma.ProntuarioUncheckedUpdateManyWithoutPacienteNestedInput
   Exame?: Prisma.ExameUncheckedUpdateManyWithoutPacienteNestedInput
 }
@@ -738,11 +1282,27 @@ export type PacienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   nome?: boolean
   cpf?: boolean
+  rg?: boolean
   telefone?: boolean
   email?: boolean
   data_nascimento?: boolean
   sexo?: boolean
+  estado_civil?: boolean
+  naturalidade?: boolean
   responsavel?: boolean
+  alergias?: boolean
+  cuidados_especiais?: boolean
+  convenio?: boolean
+  numero_carteira?: boolean
+  validade_carteira?: boolean
+  cep?: boolean
+  cidade?: boolean
+  estado?: boolean
+  logradouro?: boolean
+  numero?: boolean
+  complemento?: boolean
+  bairro?: boolean
+  referencia?: boolean
   Prontuario?: boolean | Prisma.Paciente$ProntuarioArgs<ExtArgs>
   Consulta?: boolean | Prisma.Paciente$ConsultaArgs<ExtArgs>
   Exame?: boolean | Prisma.Paciente$ExameArgs<ExtArgs>
@@ -753,36 +1313,84 @@ export type PacienteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   nome?: boolean
   cpf?: boolean
+  rg?: boolean
   telefone?: boolean
   email?: boolean
   data_nascimento?: boolean
   sexo?: boolean
+  estado_civil?: boolean
+  naturalidade?: boolean
   responsavel?: boolean
+  alergias?: boolean
+  cuidados_especiais?: boolean
+  convenio?: boolean
+  numero_carteira?: boolean
+  validade_carteira?: boolean
+  cep?: boolean
+  cidade?: boolean
+  estado?: boolean
+  logradouro?: boolean
+  numero?: boolean
+  complemento?: boolean
+  bairro?: boolean
+  referencia?: boolean
 }, ExtArgs["result"]["paciente"]>
 
 export type PacienteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
   cpf?: boolean
+  rg?: boolean
   telefone?: boolean
   email?: boolean
   data_nascimento?: boolean
   sexo?: boolean
+  estado_civil?: boolean
+  naturalidade?: boolean
   responsavel?: boolean
+  alergias?: boolean
+  cuidados_especiais?: boolean
+  convenio?: boolean
+  numero_carteira?: boolean
+  validade_carteira?: boolean
+  cep?: boolean
+  cidade?: boolean
+  estado?: boolean
+  logradouro?: boolean
+  numero?: boolean
+  complemento?: boolean
+  bairro?: boolean
+  referencia?: boolean
 }, ExtArgs["result"]["paciente"]>
 
 export type PacienteSelectScalar = {
   id?: boolean
   nome?: boolean
   cpf?: boolean
+  rg?: boolean
   telefone?: boolean
   email?: boolean
   data_nascimento?: boolean
   sexo?: boolean
+  estado_civil?: boolean
+  naturalidade?: boolean
   responsavel?: boolean
+  alergias?: boolean
+  cuidados_especiais?: boolean
+  convenio?: boolean
+  numero_carteira?: boolean
+  validade_carteira?: boolean
+  cep?: boolean
+  cidade?: boolean
+  estado?: boolean
+  logradouro?: boolean
+  numero?: boolean
+  complemento?: boolean
+  bairro?: boolean
+  referencia?: boolean
 }
 
-export type PacienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "cpf" | "telefone" | "email" | "data_nascimento" | "sexo" | "responsavel", ExtArgs["result"]["paciente"]>
+export type PacienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "cpf" | "rg" | "telefone" | "email" | "data_nascimento" | "sexo" | "estado_civil" | "naturalidade" | "responsavel" | "alergias" | "cuidados_especiais" | "convenio" | "numero_carteira" | "validade_carteira" | "cep" | "cidade" | "estado" | "logradouro" | "numero" | "complemento" | "bairro" | "referencia", ExtArgs["result"]["paciente"]>
 export type PacienteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Prontuario?: boolean | Prisma.Paciente$ProntuarioArgs<ExtArgs>
   Consulta?: boolean | Prisma.Paciente$ConsultaArgs<ExtArgs>
@@ -803,11 +1411,27 @@ export type $PacientePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: number
     nome: string
     cpf: string
+    rg: string | null
     telefone: string
     email: string
     data_nascimento: Date
     sexo: string
+    estado_civil: string | null
+    naturalidade: string | null
     responsavel: string | null
+    alergias: string | null
+    cuidados_especiais: string | null
+    convenio: string | null
+    numero_carteira: string | null
+    validade_carteira: Date | null
+    cep: string | null
+    cidade: string | null
+    estado: string | null
+    logradouro: string | null
+    numero: string | null
+    complemento: string | null
+    bairro: string | null
+    referencia: string | null
   }, ExtArgs["result"]["paciente"]>
   composites: {}
 }
@@ -1237,11 +1861,27 @@ export interface PacienteFieldRefs {
   readonly id: Prisma.FieldRef<"Paciente", 'Int'>
   readonly nome: Prisma.FieldRef<"Paciente", 'String'>
   readonly cpf: Prisma.FieldRef<"Paciente", 'String'>
+  readonly rg: Prisma.FieldRef<"Paciente", 'String'>
   readonly telefone: Prisma.FieldRef<"Paciente", 'String'>
   readonly email: Prisma.FieldRef<"Paciente", 'String'>
   readonly data_nascimento: Prisma.FieldRef<"Paciente", 'DateTime'>
   readonly sexo: Prisma.FieldRef<"Paciente", 'String'>
+  readonly estado_civil: Prisma.FieldRef<"Paciente", 'String'>
+  readonly naturalidade: Prisma.FieldRef<"Paciente", 'String'>
   readonly responsavel: Prisma.FieldRef<"Paciente", 'String'>
+  readonly alergias: Prisma.FieldRef<"Paciente", 'String'>
+  readonly cuidados_especiais: Prisma.FieldRef<"Paciente", 'String'>
+  readonly convenio: Prisma.FieldRef<"Paciente", 'String'>
+  readonly numero_carteira: Prisma.FieldRef<"Paciente", 'String'>
+  readonly validade_carteira: Prisma.FieldRef<"Paciente", 'DateTime'>
+  readonly cep: Prisma.FieldRef<"Paciente", 'String'>
+  readonly cidade: Prisma.FieldRef<"Paciente", 'String'>
+  readonly estado: Prisma.FieldRef<"Paciente", 'String'>
+  readonly logradouro: Prisma.FieldRef<"Paciente", 'String'>
+  readonly numero: Prisma.FieldRef<"Paciente", 'String'>
+  readonly complemento: Prisma.FieldRef<"Paciente", 'String'>
+  readonly bairro: Prisma.FieldRef<"Paciente", 'String'>
+  readonly referencia: Prisma.FieldRef<"Paciente", 'String'>
 }
     
 

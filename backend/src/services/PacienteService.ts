@@ -14,47 +14,32 @@ export class PacienteService {
 	}
 
 	async criarPaciente(dadosPaciente: PacientePayload) {
-		const payload = dadosPaciente as PacientePayload;
-		const nome =
-			typeof payload.nome === 'string'
-				? payload.nome
-				: typeof payload.fullName === 'string'
-					? payload.fullName
-					: '';
+		const dados = mapPacientePayloadToDbPartial(dadosPaciente);
 
-		const cpf = typeof payload.cpf === 'string' ? payload.cpf : '';
-		const telefone =
-			typeof payload.telefone === 'string'
-				? payload.telefone
-				: typeof payload.phone === 'string'
-					? payload.phone
-					: '';
-		const email = typeof payload.email === 'string' ? payload.email : '';
-		const dataNascimento = payload.data_nascimento ?? payload.birthdate;
-		const sexo =
-			typeof payload.sexo === 'string'
-				? payload.sexo
-				: typeof payload.gender === 'string'
-					? payload.gender
-					: '';
-		const responsavel =
-			typeof payload.responsavel === 'string'
-				? payload.responsavel
-				: typeof payload.emergencyContact === 'string'
-					? payload.emergencyContact
-					: typeof payload.healthInsurance === 'string'
-						? payload.healthInsurance
-						: null;
 		return await this.repository.criarPaciente({
-			nome,
-			cpf,
-			telefone,
-			email,
-			data_nascimento: dataNascimento
-				? new Date(dataNascimento as string | Date)
-				: new Date(),
-			sexo,
-			responsavel,
+			nome: dados.nome ?? '',
+			cpf: dados.cpf ?? '',
+			telefone: dados.telefone ?? '',
+			email: dados.email ?? '',
+			data_nascimento: dados.data_nascimento ?? new Date(),
+			sexo: dados.sexo ?? '',
+			rg: dados.rg ?? null,
+			estado_civil: dados.estado_civil ?? null,
+			naturalidade: dados.naturalidade ?? null,
+			responsavel: dados.responsavel ?? null,
+			alergias: dados.alergias ?? null,
+			cuidados_especiais: dados.cuidados_especiais ?? null,
+			convenio: dados.convenio ?? null,
+			numero_carteira: dados.numero_carteira ?? null,
+			validade_carteira: dados.validade_carteira ?? null,
+			cep: dados.cep ?? null,
+			cidade: dados.cidade ?? null,
+			estado: dados.estado ?? null,
+			logradouro: dados.logradouro ?? null,
+			numero: dados.numero ?? null,
+			complemento: dados.complemento ?? null,
+			bairro: dados.bairro ?? null,
+			referencia: dados.referencia ?? null,
 		});
 	}
 

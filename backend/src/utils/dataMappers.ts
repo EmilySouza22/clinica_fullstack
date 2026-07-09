@@ -19,11 +19,13 @@ export const mapPacientePayloadToDbPartial = (
 	payload: UnknownPayload,
 ): Partial<Omit<Paciente, 'id'>> => {
 	const result: Partial<Omit<Paciente, 'id'>> = {};
+	const address = (payload.address ?? {}) as UnknownPayload;
 
 	if (typeof payload.nome === 'string') result.nome = payload.nome;
 	else if (typeof payload.fullName === 'string') result.nome = payload.fullName;
 
 	if (typeof payload.cpf === 'string') result.cpf = payload.cpf;
+	if (typeof payload.rg === 'string') result.rg = payload.rg;
 
 	if (typeof payload.telefone === 'string') result.telefone = payload.telefone;
 	else if (typeof payload.phone === 'string') result.telefone = payload.phone;
@@ -38,12 +40,56 @@ export const mapPacientePayloadToDbPartial = (
 	if (typeof payload.sexo === 'string') result.sexo = payload.sexo;
 	else if (typeof payload.gender === 'string') result.sexo = payload.gender;
 
+	if (typeof payload.estado_civil === 'string')
+		result.estado_civil = payload.estado_civil;
+	else if (typeof payload.maritalStatus === 'string')
+		result.estado_civil = payload.maritalStatus;
+
+	if (typeof payload.naturalidade === 'string')
+		result.naturalidade = payload.naturalidade;
+	else if (typeof payload.birthplace === 'string')
+		result.naturalidade = payload.birthplace;
+
 	if (typeof payload.responsavel === 'string')
 		result.responsavel = payload.responsavel;
 	else if (typeof payload.emergencyContact === 'string')
 		result.responsavel = payload.emergencyContact;
+
+	if (typeof payload.alergias === 'string') result.alergias = payload.alergias;
+	else if (typeof payload.allergies === 'string')
+		result.alergias = payload.allergies;
+
+	if (typeof payload.cuidados_especiais === 'string')
+		result.cuidados_especiais = payload.cuidados_especiais;
+	else if (typeof payload.specialCare === 'string')
+		result.cuidados_especiais = payload.specialCare;
+
+	if (typeof payload.convenio === 'string') result.convenio = payload.convenio;
 	else if (typeof payload.healthInsurance === 'string')
-		result.responsavel = payload.healthInsurance;
+		result.convenio = payload.healthInsurance;
+
+	if (typeof payload.numero_carteira === 'string')
+		result.numero_carteira = payload.numero_carteira;
+	else if (typeof payload.insuranceNumber === 'string')
+		result.numero_carteira = payload.insuranceNumber;
+
+	const validadeCarteira =
+		payload.validade_carteira ?? payload.insuranceValidity;
+	if (validadeCarteira) {
+		result.validade_carteira = new Date(validadeCarteira as string);
+	}
+
+	if (typeof address.cep === 'string') result.cep = address.cep;
+	if (typeof address.city === 'string') result.cidade = address.city;
+	if (typeof address.state === 'string') result.estado = address.state;
+	if (typeof address.street === 'string') result.logradouro = address.street;
+	if (typeof address.number === 'string') result.numero = address.number;
+	if (typeof address.complement === 'string')
+		result.complemento = address.complement;
+	if (typeof address.neighborhood === 'string')
+		result.bairro = address.neighborhood;
+	if (typeof address.reference === 'string')
+		result.referencia = address.reference;
 
 	return result;
 };
@@ -52,6 +98,7 @@ export const transformPacienteResponse = (paciente: Partial<Paciente>) => ({
 	...paciente,
 	fullName: paciente.nome ?? '',
 	cpf: paciente.cpf ?? '',
+	rg: paciente.rg ?? '',
 	phone: paciente.telefone ?? '',
 	email: paciente.email ?? '',
 	birthdate:
@@ -60,25 +107,25 @@ export const transformPacienteResponse = (paciente: Partial<Paciente>) => ({
 			: (paciente.data_nascimento ?? null),
 	gender: paciente.sexo ?? '',
 	emergencyContact: paciente.responsavel ?? '',
-	healthInsurance: paciente.responsavel ?? '',
-	allergies: (paciente as any).alergias ?? '',
-	maritalStatus: (paciente as any).estado_civil ?? '',
-	birthplace: (paciente as any).naturalidade ?? '',
-	specialCare: (paciente as any).cuidados_especiais ?? '',
-	insuranceNumber: (paciente as any).numero_carteira ?? '',
+	allergies: paciente.alergias ?? '',
+	maritalStatus: paciente.estado_civil ?? '',
+	birthplace: paciente.naturalidade ?? '',
+	specialCare: paciente.cuidados_especiais ?? '',
+	healthInsurance: paciente.convenio ?? '',
+	insuranceNumber: paciente.numero_carteira ?? '',
 	insuranceValidity:
-		(paciente as any).validade_carteira instanceof Date
-			? (paciente as any).validade_carteira.toISOString().split('T')[0]
-			: ((paciente as any).validade_carteira ?? ''),
+		paciente.validade_carteira instanceof Date
+			? paciente.validade_carteira.toISOString().split('T')[0]
+			: (paciente.validade_carteira ?? ''),
 	address: {
-		cep: (paciente as any).cep ?? '',
-		city: (paciente as any).cidade ?? '',
-		state: (paciente as any).estado ?? '',
-		street: (paciente as any).logradouro ?? '',
-		number: (paciente as any).numero ?? '',
-		complement: (paciente as any).complemento ?? '',
-		neighborhood: (paciente as any).bairro ?? '',
-		reference: (paciente as any).referencia ?? '',
+		cep: paciente.cep ?? '',
+		city: paciente.cidade ?? '',
+		state: paciente.estado ?? '',
+		street: paciente.logradouro ?? '',
+		number: paciente.numero ?? '',
+		complement: paciente.complemento ?? '',
+		neighborhood: paciente.bairro ?? '',
+		reference: paciente.referencia ?? '',
 	},
 });
 
@@ -256,27 +303,26 @@ export const mapExamPayloadToDbPartial = (
 ): Partial<Exame> => {
 	const result: Partial<Exame> = {};
 
-	if (typeof payload.tipo_exame === 'string')
+	if (typeof payload.type === 'string') result.tipo_exame = payload.type;
+	else if (typeof payload.tipo_exame === 'string')
 		result.tipo_exame = payload.tipo_exame;
-	else if (typeof payload.type === 'string') result.tipo_exame = payload.type;
 
 	if (payload.valor !== undefined) {
 		result.valor = new Prisma.Decimal(Number(payload.valor));
 	}
 
-	if (typeof payload.descricao === 'string')
+	if (typeof payload.name === 'string') result.descricao = payload.name;
+	else if (typeof payload.descricao === 'string')
 		result.descricao = payload.descricao;
-	else if (typeof payload.name === 'string') result.descricao = payload.name;
 
-	const dateSource = payload.data_exame ?? payload.date ?? payload.dateTime;
+	const dateSource = payload.date ?? payload.data_exame ?? payload.dateTime;
 	if (dateSource) {
 		result.data_exame = toDate(dateSource, payload.time);
 	}
 
-	if (typeof payload.resultado === 'string')
+	if (typeof payload.results === 'string') result.resultado = payload.results;
+	else if (typeof payload.resultado === 'string')
 		result.resultado = payload.resultado;
-	else if (typeof payload.results === 'string')
-		result.resultado = payload.results;
 
 	if (payload.pacienteId !== undefined && payload.pacienteId !== null) {
 		result.pacienteId = Number(payload.pacienteId);

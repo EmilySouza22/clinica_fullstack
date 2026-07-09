@@ -140,11 +140,27 @@ export const PacienteScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   cpf: 'cpf',
+  rg: 'rg',
   telefone: 'telefone',
   email: 'email',
   data_nascimento: 'data_nascimento',
   sexo: 'sexo',
-  responsavel: 'responsavel'
+  estado_civil: 'estado_civil',
+  naturalidade: 'naturalidade',
+  responsavel: 'responsavel',
+  alergias: 'alergias',
+  cuidados_especiais: 'cuidados_especiais',
+  convenio: 'convenio',
+  numero_carteira: 'numero_carteira',
+  validade_carteira: 'validade_carteira',
+  cep: 'cep',
+  cidade: 'cidade',
+  estado: 'estado',
+  logradouro: 'logradouro',
+  numero: 'numero',
+  complemento: 'complemento',
+  bairro: 'bairro',
+  referencia: 'referencia'
 } as const
 
 export type PacienteScalarFieldEnum = (typeof PacienteScalarFieldEnum)[keyof typeof PacienteScalarFieldEnum]

@@ -88,17 +88,33 @@ model Consulta {
 }
 
 model Paciente {
-  id              Int          @id @default(autoincrement())
-  nome            String
-  cpf             String
-  telefone        String
-  email           String
-  data_nascimento DateTime
-  sexo            String
-  responsavel     String?
-  Prontuario      Prontuario[]
-  Consulta        Consulta[]
-  Exame           Exame[]
+  id                 Int          @id @default(autoincrement())
+  nome               String
+  cpf                String
+  rg                 String?
+  telefone           String
+  email              String
+  data_nascimento    DateTime
+  sexo               String
+  estado_civil       String?
+  naturalidade       String?
+  responsavel        String?
+  alergias           String?
+  cuidados_especiais String?
+  convenio           String?
+  numero_carteira    String?
+  validade_carteira  DateTime?
+  cep                String?
+  cidade             String?
+  estado             String?
+  logradouro         String?
+  numero             String?
+  complemento        String?
+  bairro             String?
+  referencia         String?
+  Prontuario         Prontuario[]
+  Consulta           Consulta[]
+  Exame              Exame[]
 
   @@map("paciente")
 }
