@@ -9,7 +9,7 @@ import {
 	MdDarkMode,
 } from 'react-icons/md';
 import { FaUserPlus, FaListAlt, FaCalendarCheck } from 'react-icons/fa';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 
 const SideMenu = () => {
 	const navigate = useNavigate();

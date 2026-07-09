@@ -1,27 +1,40 @@
 import axios from 'axios';
 
-// url base
 const apiClient = axios.create({
-    baseURL: 'http://localhost:3001'
+	baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
 });
 
-// apiClient.get('/cadastro')
+const legacyRoutes = [
+	{ from: /^\/patients(?:\/|$)/, to: '/pacientes' },
+	{ from: /^\/consults(?:\/|$)/, to: '/consultas' },
+	{ from: /^\/exams(?:\/|$)/, to: '/exames' },
+];
 
-apiClient.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('accessToken');
+const resolveUrl = (url = '') => {
+	if (!url) return url;
 
-        if(token){
-            config.headers.set('Authorization', `Bearer ${token}`)
-        }
+	const normalizedUrl = url.startsWith('/') ? url : `/${url}`;
 
-        config.headers.set('Accept', 'application/json')
+	const matchedRoute = legacyRoutes.find(({ from }) =>
+		from.test(normalizedUrl),
+	);
 
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
-)
+	if (!matchedRoute) return normalizedUrl;
+
+	return normalizedUrl.replace(matchedRoute.from, matchedRoute.to);
+};
+
+apiClient.interceptors.request.use((config) => {
+	const token = localStorage.getItem('accessToken');
+
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`;
+	}
+
+	config.headers.Accept = 'application/json';
+	config.url = resolveUrl(config.url || '');
+
+	return config;
+});
 
 export default apiClient;

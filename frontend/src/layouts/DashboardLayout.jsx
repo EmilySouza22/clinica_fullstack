@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import SideMenu from '../components/SideMenu';
 
 const DashboardLayout = () => {

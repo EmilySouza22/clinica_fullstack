@@ -1,17 +1,17 @@
-import { Navigate } from "react-router"
-import { useAuth } from "../../contexts/AuthContext"
+import { Navigate } from 'react-router';
+import { useAuth } from '../../contexts/useAuth';
 
 const PrivateRoute = ({ children }) => {
-    const { user } = useAuth()
+	const { user } = useAuth();
+	const hasToken = Boolean(
+		user?.accessToken || localStorage.getItem('accessToken'),
+	);
 
-    if (!user) {
-        return <Navigate to="/" replace />
-    }
+	if (!hasToken) {
+		return <Navigate to="/" replace />;
+	}
 
+	return children;
+};
 
-    return (
-        children
-    )
-}
-
-export default PrivateRoute
+export default PrivateRoute;
