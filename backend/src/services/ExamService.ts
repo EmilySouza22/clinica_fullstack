@@ -1,6 +1,7 @@
 import type { Exame, } from "../prisma/generated/prisma/client";
 import { examRepository, type ExamRepository } from "../repositories/ExamRepository";
-
+import { Prisma } from "../prisma/generated/prisma/client";
+type ExamPayload = Partial<Exame> & Record<string, unknown>;
 export class ExamService {
     constructor(private readonly repository: ExamRepository) { // TO-DO TIPAR SERVICE
     }

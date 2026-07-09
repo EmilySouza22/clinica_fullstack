@@ -1,37 +1,79 @@
-import type { Paciente } from "../prisma/generated/prisma/client";
-import { pacienteRepository, type PacienteRepository } from "../repositories/PacienteRepository";
-
+import type { Paciente } from '../prisma/generated/prisma/client';
+import {
+	pacienteRepository,
+	type PacienteRepository,
+} from '../repositories/PacienteRepository';
+type PacientePayload = Partial<Paciente> & Record<string, unknown>;
 export class PacienteService {
-    constructor(private readonly repository: PacienteRepository) {}
+	constructor(private readonly repository: PacienteRepository) {}
 
-    async listarTodosPacientes(pagina?: number, limite?: number) {
-        return await this.repository.listarTodosPacientes(pagina, limite)
-    }
+	async listarTodosPacientes(pagina?: number, limite?: number) {
+		return await this.repository.listarTodosPacientes(pagina, limite);
+	}
 
-    async criarPaciente(dadosPaciente: Paciente) {
-        return await this.repository.criarPaciente({
-            nome: dadosPaciente.nome,
-            cpf: dadosPaciente.cpf,
-            telefone: dadosPaciente.telefone,
-            email: dadosPaciente.email,
-            data_nascimento: dadosPaciente.data_nascimento ? new Date(dadosPaciente.data_nascimento) : new Date(),
-            sexo: dadosPaciente.sexo,
-            responsavel: dadosPaciente.responsavel || null,
-        })
-    }
+	async criarPaciente(dadosPaciente: PacientePayload) {
+		const payload = dadosPaciente as PacientePayload;
+		const nome =
+			typeof payload.nome === 'string'
+				? payload.nome
+				: typeof payload.fullName === 'string'
+					? payload.fullName
+					: '';
 
-    async buscarPacientePorId(idPaciente: number) {
-        return await this.repository.buscarPacientePorId(idPaciente)
-    }
+		const cpf = typeof payload.cpf === 'string' ? payload.cpf : '';
+		const telefone =
+			typeof payload.telefone === 'string'
+				? payload.telefone
+				: typeof payload.phone === 'string'
+					? payload.phone
+					: '';
+		const email = typeof payload.email === 'string' ? payload.email : '';
+		const dataNascimento = payload.data_nascimento ?? payload.birthdate;
+		const sexo =
+			typeof payload.sexo === 'string'
+				? payload.sexo
+				: typeof payload.gender === 'string'
+					? payload.gender
+					: '';
+		const responsavel =
+			typeof payload.responsavel === 'string'
+				? payload.responsavel
+				: typeof payload.emergencyContact === 'string'
+					? payload.emergencyContact
+					: typeof payload.healthInsurance === 'string'
+						? payload.healthInsurance
+						: null;
+		return await this.repository.criarPaciente({
+			nome,
+			cpf,
+			telefone,
+			email,
+			data_nascimento: dataNascimento
+				? new Date(dataNascimento as string | Date)
+				: new Date(),
+			sexo,
+			responsavel,
+		});
+	}
 
-    async atualizarPaciente(idPaciente: number, dadosParaAtualizar: Omit<Paciente, 'id'>) {
-        return await this.repository.atualizarPaciente(idPaciente, dadosParaAtualizar)
-    }
+	async buscarPacientePorId(idPaciente: number) {
+		return await this.repository.buscarPacientePorId(idPaciente);
+	}
 
-    async deletarPaciente(idPaciente: number) {
-        await this.repository.deletarPaciente(idPaciente)
-        return { message: "Paciente deletado com sucesso!" }
-    }
+	async atualizarPaciente(
+		idPaciente: number,
+		dadosParaAtualizar: Omit<Paciente, 'id'>,
+	) {
+		return await this.repository.atualizarPaciente(
+			idPaciente,
+			dadosParaAtualizar,
+		);
+	}
+
+	async deletarPaciente(idPaciente: number) {
+		await this.repository.deletarPaciente(idPaciente);
+		return { message: 'Paciente deletado com sucesso!' };
+	}
 }
 
-export const pacienteService = new PacienteService(pacienteRepository)
+export const pacienteService = new PacienteService(pacienteRepository);
